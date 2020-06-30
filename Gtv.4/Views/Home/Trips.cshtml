@@ -1,0 +1,68 @@
+﻿@model IEnumerable<gtv.ViewModels.Trip>
+
+<div class="container-fluid">
+    <!-- trip items -->
+    <div>
+        <br />
+        @foreach (var trip in Model)
+            {
+            <div>
+                <div style="text-align:center;">
+                    <a style="text-decoration:none;" href="~/trips/@trip.TripTag/">
+                        <div class="article-picture text-center">
+                            <img src="~/images/trips/@trip.TripTag/@trip.Image" alt="@trip.Title" class="img-fluid" style="width:80%;margin: 0 auto;" />
+                        </div>
+                        <h3 style="color: #616161;">@trip.Title</h3>
+                        <h4 style="color: #616161;">@trip.TripHeader</h4>
+                    </a>
+                </div>
+                <div id="fade-container" style="padding-bottom:30px;">
+                    <div id="fade-content">
+                        @foreach (var contentitem in trip.TripDescription)
+                        {
+                            if (contentitem is gtv.ViewModels.TextItemContainer)
+                            {
+                                var text = contentitem as gtv.ViewModels.TextItemContainer;
+                                <div class="article-text-small">
+                                    @foreach (var t in text.Items)
+                                    {
+                                        if (t.Type == gtv.ViewModels.TextType.bold)
+                                        {
+                                            <b>@t.Value</b>
+                                        }
+                                        if (t.Type == gtv.ViewModels.TextType.italic)
+                                        {
+                                            <i>@t.Value</i>
+                                        }
+                                        if (t.Type == gtv.ViewModels.TextType.text)
+                                        {
+                                            <span>@t.Value</span>
+                                        }
+                                    }
+                                </div>
+                            }
+                            if (contentitem is gtv.ViewModels.ListItem)
+                            {
+                                var listitem = contentitem as gtv.ViewModels.ListItem;
+                                <div class="article-text-small">
+                                    <ul>
+                                        @foreach (var li in listitem.Items)
+                                        {
+                                            <li>@li</li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="fade-anchor">
+                        <div class="fade-anchor-text">
+                            <a style="text-decoration:none;color: #616161;" href="~/trips/@trip.TripTag/">read more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br /><br /><br /><br />
+        }
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @RenderSection("meta", required: false)
+    <title>gtv</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand navbar-title" asp-area="" asp-controller="Home" asp-action="Index">good times van</a>
+            </div>
+            <div class="">
+                <ul class="navbar-nav navbar-right">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Trips">trips</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">about</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="GtvPics">gtvpics</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="">
+        <div>
+            @RenderBody()
+        </div>
+        <div>
+            <hr />
+            <footer>
+                <p class="site-footer">&copy; 2020 - gtv</p>
+            </footer>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,73 @@
+﻿@model gtv.ViewModels.Trip
+@{ ViewData["Title"] = Model.Title; }
+
+<div class="container-fluid" style="max-width:1400px;">
+
+    <div style="text-align:center;">
+        <a style="text-decoration:none;" href="~/trips/@Model.TripTag/">
+            <img src="~/images/trips/@Model.TripTag/@Model.Image" alt="@Model.Title" class="img-fluid" />
+            <h3>@Model.Title</h3>
+            <h4>@Model.TripHeader</h4>
+        </a>
+    </div>
+    <div>
+        @foreach (var contentitem in Model.TripDescription)
+        {
+            if (contentitem is gtv.ViewModels.TextItemContainer)
+            {
+                var text = contentitem as gtv.ViewModels.TextItemContainer;
+                <div class="article-text-small">
+                    @foreach (var t in text.Items)
+                    {
+                        if (t.Type == gtv.ViewModels.TextType.bold)
+                        {
+                            <b>@t.Value</b>
+                        }
+                        if (t.Type == gtv.ViewModels.TextType.italic)
+                        {
+                            <i>@t.Value</i>
+                        }
+                        if (t.Type == gtv.ViewModels.TextType.text)
+                        {
+                            <span>@t.Value</span>
+                        }
+                    }
+                </div>
+            }
+            if (contentitem is gtv.ViewModels.ListItem)
+            {
+                var listitem = contentitem as gtv.ViewModels.ListItem;
+                <div class="article-text-small">
+                    <ul>
+                        @foreach (var li in listitem.Items)
+                        {
+                            <li>@li</li>
+                        }
+                    </ul>
+                </div>
+            }
+        }
+    </div>
+
+    <!-- trip items -->
+    <div class="row" style="text-align:center;align-items:center;padding-left:20px;padding-right:20px;">
+        @foreach (var tripitem in Model.TripItems)
+        {
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <a style="text-decoration:none;" href="~/trips/@tripitem.TripTag/@tripitem.Tag">
+
+                    <figure>
+                        <div class="hovereffect">
+                            <img src="~/images/trips/@tripitem.TripTag/@tripitem.Tag/h_@tripitem.HeaderImage" alt="@tripitem.Title" class="img-fluid" />
+                        </div>
+                        <figcaption class="tripitem-link">
+                            <div style="font-size:.5em;">&nbsp;</div>
+                            <div style="font-size:1.5em;">@tripitem.Title</div>
+                            <div style="font-size:1em;">@tripitem.PublishDate.ToLocalTime().ToString("MMMM d, yyyy")</div>
+                        </figcaption>
+                    </figure>
+                </a>
+            </div>
+        }
+    </div>
+</div>
